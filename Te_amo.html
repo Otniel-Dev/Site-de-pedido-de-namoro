@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido de Namoro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ff99cc, #ffccff);
+      text-align: center;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      margin-top: 10%;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #yes {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #no {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .animation {
+      margin-top: 2rem;
+      font-size: 2rem;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: fall 3s linear infinite;
+    }
+
+    .surprise-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s, background-color 0.5s ease;
+      clip-path: path('M 50,15 C 65,0 100,0 100,35 C 100,70 50,100 50,100 C 50,100 0,70 0,35 C 0,0 35,0 50,15 Z');
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .box:hover {
+      transform: scale(1.1);
+    }
+
+    .box.clicked {
+      background-color: #ff99cc;
+    }
+
+    .box-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      transition: top 0.3s, opacity 0.5s ease;
+    }
+
+    .box.clicked .box-content {
+      top: 0;
+      opacity: 1;
+    }
+
+    .instruction {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #fff;
+      font-style: italic;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(-100vh) rotate(0deg);
+      }
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Você quer namorar comigo?</h1>
+    <p>Escolha com o coração ❤️</p>
+    <p class="instruction">Clique nos corações para descobrir mensagens especiais! 💖</p>
+    <div class="surprise-boxes">
+      <div class="box" onclick="showMessage(this, 'Você trouxe luz para minha vida! ✨')">
+        <div class="box-content">Você trouxe luz para minha vida! ✨</div>
+      </div>
+      <div class="box" onclick="showMessage(this, 'Desde que te conheci, não paro de sorrir! 😊')">
+        <div class="box-content">Desde que te conheci, não paro de sorrir! 😊</div>
+      </div>
+      <div class="box" onclick="showMessage(this, 'Você é o motivo dos meus melhores dias! 💕')">
+        <div class="box-content">Você é o motivo dos meus melhores dias! 💕</div>
+      </div>
+      <div class="box" onclick="showMessage(this, 'Meu coração bate mais forte por você! ❤️')">
+        <div class="box-content">Meu coração bate mais forte por você! ❤️</div>
+      </div>
+      <div class="box" onclick="showMessage(this, 'A vida é mais bonita com você ao meu lado! 🌸')">
+        <div class="box-content">A vida é mais bonita com você ao meu lado! 🌸</div>
+      </div>
+    </div>
+    <div id="message" class="animation"></div>
+    <div class="buttons">
+      <button id="yes">Sim</button>
+      <button id="no">Não</button>
+    </div>
+    <div id="response" class="animation"></div>
+  </div>
+
+  <script>
+    const yesButton = document.getElementById('yes');
+    const noButton = document.getElementById('no');
+    const responseDiv = document.getElementById('response');
+    const boxes = document.querySelectorAll('.box');
+
+    yesButton.addEventListener('click', () => {
+      responseDiv.innerHTML = `
+        <div>
+          🥳💍🎉
+          <p>Uhuuu! Estamos oficialmente namorando! 💕</p>
+        </div>
+      `;
+      animateEmojis(['❤️', '💍', '🎉']);
+      setTimeout(() => {
+        window.location.href = 'https://www.youtube.com/watch?v=XM4yuEUd8aE';
+      }, 5000);
+      resetBoxesAfterDelay();
+    });
+
+    noButton.addEventListener('click', () => {
+      responseDiv.innerHTML = `
+        <div>
+          😢😭💔
+          <p>Oh não, talvez numa próxima...</p>
+        </div>
+      `;
+      animateEmojis(['💔', '😭', '😢']);
+      setTimeout(() => {
+        window.location.href = 'https://www.youtube.com/watch?v=2cxmQYFA67Q';
+      }, 5000);
+      resetBoxesAfterDelay();
+    });
+
+    function showMessage(box, message) {
+      if (!box.classList.contains('clicked')) {
+        box.classList.add('clicked');
+        const content = box.querySelector('.box-content');
+        content.textContent = message;
+      }
+    }
+
+    function animateEmojis(emojis) {
+      const emojisContainer = document.createElement('div');
+      emojisContainer.style.position = 'fixed';
+      emojisContainer.style.top = '0';
+      emojisContainer.style.left = '0';
+      emojisContainer.style.width = '100%';
+      emojisContainer.style.height = '100%';
+      emojisContainer.style.pointerEvents = 'none';
+      document.body.appendChild(emojisContainer);
+
+      for (let i = 0; i < 50; i++) {
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 100 + 'vw';
+        emoji.style.animationDelay = Math.random() * 3 + 's';
+        emojisContainer.appendChild(emoji);
+
+        emoji.addEventListener('animationend', () => {
+          emoji.remove();
+        });
+      }
+
+      setTimeout(() => {
+        emojisContainer.remove();
+      }, 5000); // Remove emojis após 5 segundos
+    }
+
+    function resetBoxesAfterDelay() {
+      setTimeout(() => {
+        boxes.forEach(box => {
+          box.classList.remove('clicked');
+          const content = box.querySelector('.box-content');
+          content.textContent = '';
+        });
+        responseDiv.innerHTML = '';
+      }, 10000); // Reset após 10 segundos
+    }
+  </script>
+</body>
+</html>
